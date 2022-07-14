@@ -1,3 +1,5 @@
+console.log("hello")
+
 // DECLARE Current time
 
 //  DECLARE Current hour (military time)
