@@ -1,5 +1,6 @@
-// DECLARE Current time
-var currentTime
+// DECLARE Current time   
+var currentTime = moment();
+console.log(moment());
 //  DECLARE Current hour (military time)
 var currentHour
 // DECLARE Current Day HTML Element
@@ -10,6 +11,9 @@ var timeEntries
 var data
 
 var hours = [9, 10, 11, 12, 13, 14, 15, 16, 17]
+
+let timeString = currentTime.format("dddd MMMM Do")
+console.log(timeString)
 
 for(var i =9; i <=17; i++) {
 
@@ -37,6 +41,8 @@ for(var i =9; i <=17; i++) {
 $( "#timeEntries" ).append(template);
 
 }
+
+$( "#currentDay").text(timeString)
 
 
 $( ".saveBtn").on("click", function(event){
