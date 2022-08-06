@@ -1,6 +1,6 @@
 // DECLARE Current time   
 var currentTime = moment();
-console.log(moment());
+
 //  DECLARE Current hour (military time)
 var currentHour = moment().hour();
 // DECLARE Current Day HTML Element
@@ -19,9 +19,6 @@ var update = function() {
 setInterval(update, 1000);
 
 let timeString = currentTime.format("MMMM Do YYYY, h:mm:ss a")
-console.log(timeString)
-console.log(currentHour)
-
 
 for(var i =9; i <=12; i++) {
 
@@ -47,6 +44,7 @@ for(var i =9; i <=12; i++) {
         
         $( "#timeEntries" ).append(templateOne)
 };
+
         for(var i =1; i <=5; i++) {
 
             var key = "hour-"+i;
@@ -72,19 +70,24 @@ for(var i =9; i <=12; i++) {
          $( "#timeEntries" ).append(templateTwo)
          
     };
-console.log(templateOne)
-console.log(templateTwo)
 $( "#currentDay").text(timeString)
 
 
 $( ".saveBtn").on("click", function(event){
-var target = $(event.target)
-return
-})
+var hour = document.querySelector('.hour');
+var storedData = hour.nextElementSibling
+var buttonHour = event.target.dataset.hour // this is the hour of the save button
+var textData = storedData.children[0].value
+console.log(buttonHour, textData)
+var localStorageKey = "hour-" + buttonHour
+console.log(localStorageKey)
+localStorage.setItem(localStorageKey, JSON.stringify(textData))
+});
 
 
 
-// localStorage.setItem();
 // Save an hour to local storage
 // access text are of specific time block to grab inner HTML
-// save inner HTML ini local storage in a key that matches the hour number
+// save inner HTML in local storage in a key that matches the hour number
+// setItem("key", value)
+// getItem("key")
