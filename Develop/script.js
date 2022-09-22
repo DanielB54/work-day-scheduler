@@ -20,21 +20,23 @@ setInterval(update, 1000);
 
 let timeString = currentTime.format("MMMM Do YYYY, h:mm:ss a")
 
-for(var i =9; i <=12; i++) {
-
+for(var i =9; i <=17; i++) {
+    
     var key = "hour-"+i;
     // Attempt to get the saved data for the hour of the loop
-    var data = "";
+    var data = localStorage.getItem(key)
 //  Compare i to current hour to determine if this hour is in the past, present, or future
+    var time = i > 12 ? `${i-12}PM`: `${i}AM`
 
+    
     var templateOne = `
-        <div class="row" class="time-block">
+        <div class="row time-block ${i}">
             <div
             class="hour">
-                ${i}AM
+                ${time}
             </div>
             <div class="textArea">
-                <textarea>${data}</textarea>
+                <textarea>${data ? data: ''}</textarea>
             </div>
             <div>
                 <button class="saveBtn" data-hour="${i}">Save</button>
@@ -45,43 +47,18 @@ for(var i =9; i <=12; i++) {
         $( "#timeEntries" ).append(templateOne)
 };
 
-        for(var i =1; i <=5; i++) {
-
-            var key = "hour-"+i;
-            // Attempt to get the saved data for the hour of the loop
-            var data = "";
-    var templateTwo = `
-        <div class="row" class="time-block">
-            <div
-            class="hour">
-                ${i}PM
-            </div>
-            <div class="textArea">
-                <textarea>${data}</textarea>
-            </div>
-            <div>
-                <button class="saveBtn" data-hour="${i}">Save</button>
-            </div>
-        </div>
-    `;
-    
-    // Append the html to the page
-   
-         $( "#timeEntries" ).append(templateTwo)
-         
-    };
 $( "#currentDay").text(timeString)
 
 
 $( ".saveBtn").on("click", function(event){
-var hour = document.querySelector('.hour');
-var storedData = hour.nextElementSibling
+var textInput = event.target.closest('.row').querySelector('textarea')
 var buttonHour = event.target.dataset.hour // this is the hour of the save button
-var textData = storedData.children[0].value
+var textData = textInput.value
 console.log(buttonHour, textData)
 var localStorageKey = "hour-" + buttonHour
 console.log(localStorageKey)
-localStorage.setItem(localStorageKey, JSON.stringify(textData))
+console.log(textInput)
+localStorage.setItem(localStorageKey, textData)
 });
 
 
